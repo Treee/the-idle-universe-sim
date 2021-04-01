@@ -46,9 +46,12 @@ function attachStartLoopButton() {
 }
 
 function startGameLoop() {
-  mainGameLoopInterval = setInterval(function () {
-    mainGameLoop(mainGameLoopDelta);
-  }, mainGameLoopDelta);
+  if (!mainGameLoopInterval) {
+    mainGameLoopInterval = setInterval(function () {
+      mainGameLoop(mainGameLoopDelta);
+    }, mainGameLoopDelta);
+    console.log(`Interval started ${mainGameLoopInterval}`);
+  }
 }
 
 function mainGameLoop(delta) {
@@ -78,6 +81,8 @@ function attachStopLoopButton() {
 
 function stopGameLoop() {
   clearInterval(mainGameLoopInterval);
+  console.log(`Interval cleared ${mainGameLoopInterval}`);
+  mainGameLoopInterval = undefined;
 }
 
 function buildElementCounter(elementId, displayName, elementCounterValue) {
