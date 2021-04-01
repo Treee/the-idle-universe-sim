@@ -70,7 +70,7 @@ function updateAllUICounters() {
 }
 
 function updateUICounter(id, counter) {
-  document.getElementById(id).innerHTML = counter;
+  document.getElementById(id).innerHTML = counter.toFixed(2);
 }
 
 function attachStopLoopButton() {
@@ -90,15 +90,17 @@ function buildElementCounter(elementId, displayName, elementCounterValue) {
 
   const btnUpgrade = document.createElement("button");
   btnUpgrade.setAttribute("id", `btn-${elementId}`);
-  btnUpgrade.innerHTML = displayName;
+  btnUpgrade.innerHTML = "Increase Collection";
   counterWrapper.append(btnUpgrade);
-  btnUpgrade.addEventListener("click", function () {});
+  btnUpgrade.addEventListener("click", function () {
+    gameProperties.elements[displayName.toLowerCase()].multiplier += 0.05;
+  });
 
-  // const counterLabel = document.createElement("label");
-  // counterLabel.setAttribute("id", `label-${elementId}`);
-  // counterLabel.setAttribute("for", `${elementId}`);
-  // counterLabel.innerHTML = `${displayName}: `;
-  // counterWrapper.append(counterLabel);
+  const counterLabel = document.createElement("label");
+  counterLabel.setAttribute("id", `label-${elementId}`);
+  counterLabel.setAttribute("for", `${elementId}`);
+  counterLabel.innerHTML = `${displayName}: `;
+  counterWrapper.append(counterLabel);
 
   const newCounter = document.createElement("span");
   newCounter.setAttribute("id", elementId);
