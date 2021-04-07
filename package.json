@@ -2,11 +2,19 @@
   "name": "the-idle-universe-sim",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify src/index.js -p esmify > dist/bundle.js && npm run copyfiles-root && npm run copyfiles-src",
+    "copyfiles-src": "copyfiles -u 1 src/index.html src/styles.css src/favicon.ico dist",
+    "copyfiles-root": "copyfiles -f README.md dist"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "copyfiles": "^2.4.1",
+    "esmify": "^2.1.1"
+  }
 }
