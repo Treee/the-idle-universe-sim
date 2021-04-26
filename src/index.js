@@ -1,69 +1,75 @@
 import { GuiUniverse } from "./gui.js";
+import { CONSTANTS } from "./constants.js";
 
-const mainGameLoopDelta = 1000;
-const gameProperties = {
-  mainCounter: 0,
-  elements: {
-    hydrogen: {
-      id: "element-hydrogen",
-      displayName: "Hydrogen",
-      count: 0,
-      multiplier: 1,
-      additive: 0,
-    },
-    helium: {
-      id: "element-helium",
-      displayName: "Helium",
-      count: 0,
-      multiplier: 1,
-      additive: 0,
-    },
-  },
-};
-let mainGameLoopInterval;
+// const mainGameLoopDelta = 1000;
+// const gameProperties = {
+//   mainCounter: 0,
+//   elements: {
+//     hydrogen: {
+//       id: "element-hydrogen",
+//       displayName: "Hydrogen",
+//       count: 0,
+//       multiplier: 1,
+//       additive: 0,
+//     },
+//     helium: {
+//       id: "element-helium",
+//       displayName: "Helium",
+//       count: 0,
+//       multiplier: 1,
+//       additive: 0,
+//     },
+//   },
+// };
+// let mainGameLoopInterval;
+let guiManager = undefined;
 
 function FofX(multiplier, additive, x) {
   return multiplier * x + additive * x;
 }
 
 function increaseElement(elementKey, dt) {
-  gameProperties.elements[elementKey].count += FofX(
-    gameProperties.elements[elementKey].multiplier,
-    gameProperties.elements[elementKey].additive,
+  CONSTANTS.gameProperties.elements[elementKey].count += FofX(
+    CONSTANTS.gameProperties.elements[elementKey].multiplier,
+    CONSTANTS.gameProperties.elements[elementKey].additive,
     dt
   );
 }
 
 function increaseElementsLoop(dt) {
-  const elements = Object.keys(gameProperties.elements);
+  const elements = Object.keys(CONSTANTS.gameProperties.elements);
   for (let i = 0; i < elements.length; i++) {
     increaseElement(elements[i], dt);
   }
 }
 
 function mainGameLoop(delta) {
-  gameProperties.mainCounter += 1;
+  CONSTANTS.gameProperties.mainCounter += 1;
   increaseElementsLoop(delta / 1000);
-  updateAllUICounters();
+  guiManager.updateAllUICounters();
 }
 
 function startGameLoop() {
-  if (!mainGameLoopInterval) {
-    mainGameLoopInterval = setInterval(function () {
-      mainGameLoop(mainGameLoopDelta);
-    }, mainGameLoopDelta);
-    console.log(`Interval started ${mainGameLoopInterval}`);
+  if (!CONSTANTS.gameIntervals.mainGameLoopInterval) {
+    CONSTANTS.gameIntervals.mainGameLoopInterval = setInterval(function () {
+      mainGameLoop(CONSTANTS.mainGameLoopDelta);
+    }, CONSTANTS.mainGameLoopDelta);
+    console.log(
+      `Interval started ${CONSTANTS.gameIntervals.mainGameLoopInterval}`
+    );
   }
 }
 
 function stopGameLoop() {
-  console.log(`Interval cleared ${mainGameLoopInterval}`);
-  clearInterval(mainGameLoopInterval);
-  mainGameLoopInterval = undefined;
+  console.log(
+    `Interval cleared ${CONSTANTS.gameIntervals.mainGameLoopInterval}`
+  );
+  clearInterval(CONSTANTS.gameIntervals.mainGameLoopInterval);
+  CONSTANTS.gameIntervals.mainGameLoopInterval = undefined;
 }
 
 window.addEventListener("load", function () {
-  const guiManager = new GuiUniverse(gameProperties);
+  guiManager = new GuiUniverse(CONSTANTS.gameProperties);
   guiManager.buildElmentCounterDisplay();
   guiManager.attachStartLoopButton(() => {
     return startGameLoop();

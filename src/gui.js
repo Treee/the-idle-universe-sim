@@ -20,15 +20,17 @@ export class GuiUniverse {
   buildElementCounter(elementId, displayName, elementCounterValue) {
     const counterWrapper = document.createElement("div");
 
-    const btnUpgrade = document.createElement("button");
-    btnUpgrade.setAttribute("id", `btn-${elementId}`);
-    btnUpgrade.innerHTML = "Increase Collection";
-    counterWrapper.append(btnUpgrade);
-    btnUpgrade.addEventListener("click", () => {
-      this.gameProperties.elements[
-        displayName.toLowerCase()
-      ].multiplier += 0.05;
-    });
+    if (displayName !== "Elapsed Time") {
+      const btnUpgrade = document.createElement("button");
+      btnUpgrade.setAttribute("id", `btn-${elementId}`);
+      btnUpgrade.innerHTML = "Increase Collection";
+      counterWrapper.append(btnUpgrade);
+      btnUpgrade.addEventListener("click", () => {
+        this.gameProperties.elements[
+          displayName.toLowerCase()
+        ].multiplier += 0.05;
+      });
+    }
 
     const counterLabel = document.createElement("label");
     counterLabel.setAttribute("id", `label-${elementId}`);
@@ -45,11 +47,11 @@ export class GuiUniverse {
   }
 
   updateAllUICounters() {
-    updateUICounter("main-counter", this.gameProperties.mainCounter);
+    this.updateUICounter("main-counter", this.gameProperties.mainCounter);
     const elements = Object.keys(this.gameProperties.elements);
     for (let i = 0; i < elements.length; i++) {
       const element = this.gameProperties.elements[elements[i]];
-      updateUICounter(element.id, element.count);
+      this.updateUICounter(element.id, element.count);
     }
   }
 
