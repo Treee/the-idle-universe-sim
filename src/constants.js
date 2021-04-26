@@ -9,6 +9,7 @@ export const CONSTANTS = {
       hydrogen: {
         id: "element-hydrogen",
         displayName: "Hydrogen",
+        atomicNumber: 1,
         count: 0,
         multiplier: 1,
         additive: 0,
@@ -16,6 +17,7 @@ export const CONSTANTS = {
       helium: {
         id: "element-helium",
         displayName: "Helium",
+        atomicNumber: 2,
         count: 0,
         multiplier: 1,
         additive: 0,
