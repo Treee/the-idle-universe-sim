@@ -11,7 +11,7 @@ export const CONSTANTS = {
         displayName: "Hydrogen",
         atomicNumber: 1,
         count: 0,
-        multiplier: 1,
+        multiplier: 0,
         additive: 0,
       },
       helium: {
@@ -19,7 +19,7 @@ export const CONSTANTS = {
         displayName: "Helium",
         atomicNumber: 2,
         count: 0,
-        multiplier: 1,
+        multiplier: 0,
         additive: 0,
       },
     },

@@ -21,11 +21,21 @@ export class GuiUniverse {
     const counterWrapper = document.createElement("div");
 
     if (displayName !== "Elapsed Time") {
-      const btnUpgrade = document.createElement("button");
-      btnUpgrade.setAttribute("id", `btn-${elementId}`);
-      btnUpgrade.innerHTML = "Increase Collection";
-      counterWrapper.append(btnUpgrade);
-      btnUpgrade.addEventListener("click", () => {
+      const btnUpgradeAdditive = document.createElement("button");
+      btnUpgradeAdditive.setAttribute("id", `btn-${elementId}`);
+      btnUpgradeAdditive.innerHTML = "Increase Collection Additive";
+      counterWrapper.append(btnUpgradeAdditive);
+      btnUpgradeAdditive.addEventListener("click", () => {
+        this.gameProperties.elements[
+          displayName.toLowerCase()
+        ].additive += 0.05;
+      });
+
+      const btnUpgradeMultiplier = document.createElement("button");
+      btnUpgradeMultiplier.setAttribute("id", `btn-${elementId}`);
+      btnUpgradeMultiplier.innerHTML = "Increase Collection Multiplier";
+      counterWrapper.append(btnUpgradeMultiplier);
+      btnUpgradeMultiplier.addEventListener("click", () => {
         this.gameProperties.elements[
           displayName.toLowerCase()
         ].multiplier += 0.05;
