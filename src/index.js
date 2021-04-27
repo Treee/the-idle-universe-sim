@@ -1,28 +1,7 @@
 import { GuiUniverse } from "./gui.js";
 import { CONSTANTS } from "./constants.js";
 
-// const mainGameLoopDelta = 1000;
-// const gameProperties = {
-//   mainCounter: 0,
-//   elements: {
-//     hydrogen: {
-//       id: "element-hydrogen",
-//       displayName: "Hydrogen",
-//       count: 0,
-//       multiplier: 1,
-//       additive: 0,
-//     },
-//     helium: {
-//       id: "element-helium",
-//       displayName: "Helium",
-//       count: 0,
-//       multiplier: 1,
-//       additive: 0,
-//     },
-//   },
-// };
-// let mainGameLoopInterval;
-let guiManager = undefined;
+let guiManager;
 
 function FofX(multiplier, additive, x) {
   return multiplier * x + additive * x;
